@@ -10,6 +10,9 @@ namespace Faker
 	{
 		static void Main(string[] args)
 		{
+			IFaker faker = new Faker();
+			Student student = faker.Create<Student>();
+			Console.WriteLine(student.ToString());
 		}
 	}
 }
