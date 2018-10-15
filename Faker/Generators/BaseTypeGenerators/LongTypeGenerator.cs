@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Faker.Generators.BaseTypeGenerators
 {
-	class LongTypeGenerator : IBaseTypeGenerator
+	class LongTypeGenerator : IGenerator
 	{
 		Random random;
 

@@ -1,5 +1,8 @@
-﻿using Faker.Generators.BaseTypeGenerators;
+﻿using Faker.Generators;
+using Faker.Generators.BaseTypeGenerators;
+using Faker.Generators.ListTypeGenerators;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -10,15 +13,20 @@ namespace Faker
 {
 	class Faker : IFaker
 	{
-		private Dictionary<Type, IBaseTypeGenerator> baseTypeGenerator;
+		private Dictionary<Type, IGenerator> baseTypeGenerator;
+		private Dictionary<Type, IGenericTypeGenerator> genericTypeGenerator;
 
 		public Faker()
 		{
-			baseTypeGenerator = new Dictionary<Type, IBaseTypeGenerator>();
+			baseTypeGenerator = new Dictionary<Type, IGenerator>();
 
 			baseTypeGenerator.Add(typeof(int), new IntTypeGenerator());
 			baseTypeGenerator.Add(typeof(double), new DoubleTypeGenerator());
 			baseTypeGenerator.Add(typeof(long), new LongTypeGenerator());
+
+			genericTypeGenerator = new Dictionary<Type, IGenericTypeGenerator>();
+
+			genericTypeGenerator.Add(typeof(List<>), new ListTypeGenerator());
 		}
 
 		public T Create<T>()
@@ -45,15 +53,27 @@ namespace Faker
 
 		private object GenerateValue(Type type)
 		{
-			IBaseTypeGenerator generator;
 			object obj;
-			if (baseTypeGenerator.TryGetValue(type, out generator))
+			if (baseTypeGenerator.TryGetValue(type, out IGenerator generator))
 			{
 				obj = generator.Generate();
 				return obj;
 			}
+			else if (type.IsGenericType && genericTypeGenerator.TryGetValue(type.GetGenericTypeDefinition(), out IGenericTypeGenerator genericGenerator))
+			{
+				int listLength = 0;
+
+				IList list = (IList)genericGenerator.Generate(type.FullName, ref listLength);
+				for (int i =0; i<listLength; i++)
+				{
+					list.Add(Create(type.GenericTypeArguments[0]));
+				}
+				obj = list;
+				return obj;
+			}
 			else if(type.IsClass)
 			{
+				Console.WriteLine("4321");
 				obj = Create(type);
 				return obj;
 			}

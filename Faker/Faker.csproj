@@ -66,7 +66,10 @@
     <Compile Include="Generators\BaseTypeGenerators\IBaseTypeGenerator.cs" />
     <Compile Include="Generators\BaseTypeGenerators\IntTypeGenerator.cs" />
     <Compile Include="Generators\BaseTypeGenerators\LongTypeGenerator.cs" />
-    <Compile Include="Generators\CustomtypeGenerator\CustomeTypeGenerator.cs" />
+    <Compile Include="Generators\CustomTypeGenerator\CustomeTypeGenerator.cs" />
+    <Compile Include="Generators\IGenerator.cs" />
+    <Compile Include="Generators\ListTypeGenerators\IGenericTypeGenerator.cs" />
+    <Compile Include="Generators\ListTypeGenerators\ListTypeGenerator.cs" />
     <Compile Include="IFaker.cs" />
     <Compile Include="Lesson.cs" />
     <Compile Include="Program.cs" />
