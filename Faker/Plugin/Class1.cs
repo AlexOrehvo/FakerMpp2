@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker.Generators.BaseTypeGenerators
+namespace Plugin
 {
-	interface IBaseTypeGenerator
-	{
-		
-	}
+    public class Class1
+    {
+    }
 }

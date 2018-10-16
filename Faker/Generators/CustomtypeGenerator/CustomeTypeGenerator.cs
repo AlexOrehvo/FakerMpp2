@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker.Generators.CustomtypeGenerator
+namespace FakerNameSpace.Generators.CustomtypeGenerator
 {
 	class CustomeTypeGenerator
 	{

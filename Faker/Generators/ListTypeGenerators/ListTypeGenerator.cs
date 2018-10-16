@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker.Generators.ListTypeGenerators
+namespace FakerNameSpace.Generators.ListTypeGenerators
 {
 	class ListTypeGenerator : IGenericTypeGenerator
 	{

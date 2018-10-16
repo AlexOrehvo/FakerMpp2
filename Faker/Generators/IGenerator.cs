@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker.Generators
+namespace FakerNameSpace.Generators
 {
-	interface IGenerator
+	public interface IGenerator
 	{
 		Object Generate();
 	}

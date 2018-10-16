@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker.Generators.BaseTypeGenerators
+namespace FakerNameSpace.Generators.SystemTypeGenerators
 {
-	class DoubleTypeGenerator: IGenerator
+	class LongTypeGenerator : IGenerator
 	{
 		Random random;
 
 		public object Generate()
 		{
-			return random.NextDouble();
+			return random.Next();
 		}
 
-		public DoubleTypeGenerator()
+		public LongTypeGenerator()
 		{
 			random = new Random();
 		}

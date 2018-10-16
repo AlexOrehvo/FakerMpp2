@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Faker.Generators.BaseTypeGenerators
+namespace FakerNameSpace.Generators.SystemTypeGenerators
 {
-	class LongTypeGenerator : IGenerator
+	class IntTypeGenerator : IGenerator
 	{
 		Random random;
 
@@ -15,7 +15,7 @@ namespace Faker.Generators.BaseTypeGenerators
 			return random.Next();
 		}
 
-		public LongTypeGenerator()
+		public IntTypeGenerator()
 		{
 			random = new Random();
 		}
