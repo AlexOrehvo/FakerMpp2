@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
 
-using FakerNameSpace.Generators;
 using FakerNameSpace.Generators.SimpleTypeGenerators;
 using FakerNameSpace.Generators.ListTypeGenerators;
 
@@ -39,7 +38,11 @@ namespace FakerNameSpace
 					}
 				}
 			}
-			
+
+			if (!simpleTypeGenerator.ContainsKey(typeof(Boolean)))
+			{
+				simpleTypeGenerator.Add(typeof(Boolean), new BoolTypeGenerator());
+			}
 			if (!simpleTypeGenerator.ContainsKey(typeof(DateTime)))
 			{
 				simpleTypeGenerator.Add(typeof(DateTime), new DateTypeGenerator());
@@ -47,6 +50,10 @@ namespace FakerNameSpace
 			if (!simpleTypeGenerator.ContainsKey(typeof(double)))
 			{
 				simpleTypeGenerator.Add(typeof(double), new DoubleTypeGenerator());
+			}
+			if (!simpleTypeGenerator.ContainsKey(typeof(float)))
+			{
+				simpleTypeGenerator.Add(typeof(float), new FloatTypeGenerator());
 			}
 			if (!simpleTypeGenerator.ContainsKey(typeof(int)))
 			{

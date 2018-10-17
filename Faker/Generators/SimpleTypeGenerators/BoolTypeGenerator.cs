@@ -1,12 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Faker.Generators.SimpleTypeGenerators
+namespace FakerNameSpace.Generators.SimpleTypeGenerators
 {
-	class BoolTypeGenerator
+	class BoolTypeGenerator : ISimpleTypeGenerator
 	{
+		public Type GeneratedType { get; }
+
+		public object Generate()
+		{
+			return true;
+		}
+
+		public BoolTypeGenerator()
+		{
+			GeneratedType = typeof(Boolean);
+		}
 	}
 }

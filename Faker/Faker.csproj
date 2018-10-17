@@ -65,8 +65,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Faker.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\BoolTypeGenerator.cs" />
     <Compile Include="Generators\SimpleTypeGenerators\DateTypeGenerator.cs" />
     <Compile Include="Generators\SimpleTypeGenerators\DoubleTypeGenerator.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\FloatTypeGenerator.cs" />
     <Compile Include="Generators\SimpleTypeGenerators\IntTypeGenerator.cs" />
     <Compile Include="Generators\SimpleTypeGenerators\ISimpleTypeGenerator.cs" />
     <Compile Include="Generators\SimpleTypeGenerators\LongTypeGenerator.cs" />
