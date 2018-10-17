@@ -24,7 +24,7 @@ namespace FakerNameSpace
 
 			List<Assembly> assemblies = GetAssemblies(pluginsPath);
 			ISimpleTypeGenerator pluginGenerator = null;
-			/*
+			
 			foreach (Assembly a in  assemblies)
 			{
 				foreach (Type type in a.GetTypes())
@@ -39,7 +39,7 @@ namespace FakerNameSpace
 					}
 				}
 			}
-			*/
+			
 			if (!simpleTypeGenerator.ContainsKey(typeof(DateTime)))
 			{
 				simpleTypeGenerator.Add(typeof(DateTime), new DateTypeGenerator());
@@ -150,12 +150,7 @@ namespace FakerNameSpace
 			{
 				obj = Create(type);
 				return obj;
-			}/*
-			else if (type.IsValueType && !type.IsClass && systemTypeGenerator.TryGetValue(type, out IGenerator generator))
-			{
-				obj = generator.Generate();
-				return obj;
-			}*/
+			}
 			return null;
 		}
 	}
