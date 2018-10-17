@@ -1,20 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FakerNameSpace.Generators;
+using FakerNameSpace.Generators.SimpleTypeGenerators;
 
 namespace DateGeneratorPlugin
 {
-	public class DateGenerator : IGenerator
+	public class DateGenerator : ISimpleTypeGenerator
 	{
+		public Type GeneratedType { get; }
+
 		public object Generate()
 		{
 			DateTime dateTime = new DateTime();
 			dateTime = DateTime.Today;
-			Console.WriteLine(dateTime.ToLocalTime());
 			return dateTime;
+		}
+
+		public DateGenerator()
+		{
+			GeneratedType = typeof(DateTime);
 		}
 	}
 }

@@ -65,14 +65,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Faker.cs" />
-    <Compile Include="Generators\SystemTypeGenerators\DateTypeGenerator.cs" />
-    <Compile Include="Generators\SystemTypeGenerators\DoubleTypeGenerator.cs" />
-    <Compile Include="Generators\SystemTypeGenerators\IntTypeGenerator.cs" />
-    <Compile Include="Generators\SystemTypeGenerators\LongTypeGenerator.cs" />
-    <Compile Include="Generators\CustomTypeGenerator\CustomeTypeGenerator.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\DateTypeGenerator.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\DoubleTypeGenerator.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\IntTypeGenerator.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\ISimpleTypeGenerator.cs" />
+    <Compile Include="Generators\SimpleTypeGenerators\LongTypeGenerator.cs" />
     <Compile Include="Generators\IGenerator.cs" />
-    <Compile Include="Generators\ListTypeGenerators\IGenericTypeGenerator.cs" />
-    <Compile Include="Generators\ListTypeGenerators\ListTypeGenerator.cs" />
+    <Compile Include="Generators\GenericTypeGenerators\IGenericTypeGenerator.cs" />
+    <Compile Include="Generators\GenericTypeGenerators\ListTypeGenerator.cs" />
     <Compile Include="IFaker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

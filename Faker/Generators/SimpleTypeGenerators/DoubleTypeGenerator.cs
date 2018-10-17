@@ -1,14 +1,17 @@
-﻿using System;
+﻿using FakerNameSpace.Generators.SimpleTypeGenerators;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FakerNameSpace.Generators.SystemTypeGenerators
+namespace FakerNameSpace.Generators.SimpleTypeGenerators
 {
-	class DoubleTypeGenerator: IGenerator
+	class DoubleTypeGenerator: ISimpleTypeGenerator
 	{
 		Random random;
+
+		public Type GeneratedType { get; }
 
 		public object Generate()
 		{
@@ -17,6 +20,7 @@ namespace FakerNameSpace.Generators.SystemTypeGenerators
 
 		public DoubleTypeGenerator()
 		{
+			GeneratedType = typeof(double);
 			random = new Random();
 		}
 	}

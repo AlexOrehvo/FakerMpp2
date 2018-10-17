@@ -1,68 +1,93 @@
-﻿using FakerNameSpace.Generators;
-using FakerNameSpace.Generators.SystemTypeGenerators;
-using FakerNameSpace.Generators.ListTypeGenerators;
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using System.IO;
+
+using FakerNameSpace.Generators;
+using FakerNameSpace.Generators.SimpleTypeGenerators;
+using FakerNameSpace.Generators.ListTypeGenerators;
 
 namespace FakerNameSpace
 {
 	public class Faker : IFaker
 	{
 
-		private Dictionary<Type, IGenerator> systemTypeGenerator;
+		private Dictionary<Type, ISimpleTypeGenerator> simpleTypeGenerator;
 		private Dictionary<Type, IGenericTypeGenerator> genericTypeGenerator;
+		private string pluginsPath = "Plugins";
 
 		public Faker()
 		{
-			systemTypeGenerator = new Dictionary<Type, IGenerator>();
+			simpleTypeGenerator = new Dictionary<Type, ISimpleTypeGenerator>();
 			genericTypeGenerator = new Dictionary<Type, IGenericTypeGenerator>();
 
-			Assembly a = null;
-			IGenerator pluginGenerator;
-
-			try
+			List<Assembly> assemblies = GetAssemblies(pluginsPath);
+			ISimpleTypeGenerator pluginGenerator = null;
+			/*
+			foreach (Assembly a in  assemblies)
 			{
-
-				a = Assembly.LoadFrom("Plugins/DateGeneratorPlugin.dll");
-				Console.WriteLine("File is loaded!");
 				foreach (Type type in a.GetTypes())
 				{
 					foreach (Type typeInterface in type.GetInterfaces())
 					{
-						if (typeInterface.Equals(typeof(IGenerator)))
+						if (typeInterface.Equals(typeof(ISimpleTypeGenerator)))
 						{
-							pluginGenerator = (IGenerator)Activator.CreateInstance(type);
-							systemTypeGenerator.Add(typeof(DateTime), pluginGenerator);
+							pluginGenerator = (ISimpleTypeGenerator)Activator.CreateInstance(type);
+							simpleTypeGenerator.Add(pluginGenerator.GeneratedType, pluginGenerator);
 						}
 					}
 				}
 			}
-			catch (BadImageFormatException)
-			{ }
-			catch (FileNotFoundException)
+			*/
+			if (!simpleTypeGenerator.ContainsKey(typeof(DateTime)))
 			{
-				Console.WriteLine("Can not load file!");
+				simpleTypeGenerator.Add(typeof(DateTime), new DateTypeGenerator());
+			}
+			if (!simpleTypeGenerator.ContainsKey(typeof(double)))
+			{
+				simpleTypeGenerator.Add(typeof(double), new DoubleTypeGenerator());
+			}
+			if (!simpleTypeGenerator.ContainsKey(typeof(int)))
+			{
+				simpleTypeGenerator.Add(typeof(int), new IntTypeGenerator());
+			}
+			if (!simpleTypeGenerator.ContainsKey(typeof(long)))
+			{
+				simpleTypeGenerator.Add(typeof(long), new LongTypeGenerator());
 			}
 
 
-			
-
-			systemTypeGenerator.Add(typeof(int), new IntTypeGenerator());
-			systemTypeGenerator.Add(typeof(double), new DoubleTypeGenerator());
-			systemTypeGenerator.Add(typeof(long), new LongTypeGenerator());
-			//systemTypeGenerator.Add(typeof(DateTime), new DateTypeGenerator());
-
-			
-
-			genericTypeGenerator.Add(typeof(List<>), new ListTypeGenerator());
+			if (!genericTypeGenerator.ContainsKey(typeof(List<>)))
+			{
+				genericTypeGenerator.Add(typeof(List<>), new ListTypeGenerator());
+			}
 		}
 
-		public T Create<T>()
+		private List<Assembly> GetAssemblies(string path)
 		{
-			//T obj = (T)Activator.CreateInstance(typeof(T));
+			List<Assembly> assemblies = new List<Assembly>();
+			try
+			{
+				foreach (string file in Directory.GetFiles(pluginsPath, "*.dll"))
+				{
+					try
+					{
+						assemblies.Add(Assembly.LoadFile(new FileInfo(file).FullName));
+					}
+					catch (BadImageFormatException)
+					{ }
+					catch (FileLoadException)
+					{ }
+				}
+			}
+			catch (DirectoryNotFoundException)
+			{ }
+			return assemblies;
+		}
+
+ 		public T Create<T>()
+		{
 			T obj = (T)Create(typeof(T));
 			return obj;
 		}
@@ -104,7 +129,7 @@ namespace FakerNameSpace
 		private object GenerateValue(Type type)
 		{
 			object obj;
-			if (systemTypeGenerator.TryGetValue(type, out IGenerator generator))
+			if (simpleTypeGenerator.TryGetValue(type, out ISimpleTypeGenerator generator))
 			{
 				obj = generator.Generate();
 				return obj;
@@ -133,22 +158,5 @@ namespace FakerNameSpace
 			}*/
 			return null;
 		}
-
-		/*private Object Create(Type type)
-		{		
-		}*/
-
-
-		/*private void SetBaseTypes<T>(Type type, T obj)
-		{
-			IBaseTypeGenerator generator;
-			foreach (PropertyInfo property in type.GetProperties())
-			{
-				if (baseTypeGenerator.TryGetValue(property.PropertyType, out generator))
-				{
-					property.SetValue(obj, generator.Generate());
-				}
-			}
-		}*/
 	}
 }

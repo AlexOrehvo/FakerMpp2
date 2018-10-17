@@ -11,6 +11,8 @@ namespace FakerNameSpace.Generators.ListTypeGenerators
 	{
 		Random random;
 
+		public Type GeneratedType { get; }
+
 		public object Generate(string fullName, ref int length)
 		{
 			length = random.Next(2, 10);
@@ -18,6 +20,7 @@ namespace FakerNameSpace.Generators.ListTypeGenerators
 		}
 
 		public ListTypeGenerator() {
+			GeneratedType = typeof(List<>);
 			random = new Random();
 		}
 

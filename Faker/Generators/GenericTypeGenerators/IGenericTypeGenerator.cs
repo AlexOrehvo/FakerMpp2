@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FakerNameSpace.Generators.ListTypeGenerators
 {
-	interface IGenericTypeGenerator
+	public interface IGenericTypeGenerator : IGenerator
 	{
 		object Generate(string fullName, ref int length);
 	}

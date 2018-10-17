@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FakerNameSpace.Generators.CustomtypeGenerator
+namespace DateGeneratorPlugin
 {
-	class CustomeTypeGenerator
+	interface ISimplerGenerator
 	{
+		object Generate();
+
+		Type GeneratedType { get; }
 	}
 }

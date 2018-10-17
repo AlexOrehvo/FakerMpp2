@@ -1,10 +1,13 @@
-﻿using System;
+﻿using FakerNameSpace.Generators.SimpleTypeGenerators;
+using System;
 
-namespace FakerNameSpace.Generators.SystemTypeGenerators
+namespace FakerNameSpace.Generators.SimpleTypeGenerators
 {
-	class DateTypeGenerator : IGenerator
+	class DateTypeGenerator : ISimpleTypeGenerator
 	{
 		private Random random;
+
+		public Type GeneratedType { get; }
 
 		public object Generate()
 		{
@@ -20,6 +23,7 @@ namespace FakerNameSpace.Generators.SystemTypeGenerators
 
 		public DateTypeGenerator()
 		{
+			GeneratedType = typeof(DateTime);
 			random = new Random();
 		}
 	}
